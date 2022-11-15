@@ -9,9 +9,9 @@ This repo is base on the <https://github.com/AnIdiotsGuide/guidebot/>, and add f
 * Rename `config.js.example` to `config.js`
 * Rename `.env-example` to `.env`
 * `node index.js` to start the bot
-* get bot's token
+* Get bot's token
   * Go to the <https://discord.com/developers/applications/me>
   * Create a `New Application`
   * Click `Bot`, `Add Bot` then finally click `Yes, do it`
   * Visit <https://discord.com/oauth2/authorize?client_id=APP_ID&scope=bot> , replacing `APP_ID` with the `Application ID` from the app page, to add the bot to your server (or ask a server admin to do it for you). If you're wanting slash commands as well, add `%20applications.commands` to the end of the URL above.
-  * copy the bot `TOKEN` and paste it in `.env` after `DISCORD_TOKEN=`
+  * Copy the bot `TOKEN` and paste it in `.env` after `DISCORD_TOKEN=`
