@@ -26,6 +26,7 @@ module.exports = async (client, message) => {
     return message.reply(`My prefix on this guild is \`${settings.prefix}\``);
   }
 
+  console.log("====> message.content :", message.content);
   // It's also good practice to ignore any and all messages that do not start
   // with our prefix, or a bot mention.
   const prefix = new RegExp(`^<@!?${client.user.id}> |^\\${settings.prefix}`).exec(message.content);
