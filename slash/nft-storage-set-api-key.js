@@ -10,7 +10,7 @@ exports.run = async (client, interaction) => {
   const apiKey = interaction.options.getString("api_key");
   await interaction.followUp({
     ephemeral: true,
-    content: "I'm saving your nft.storage api key now, pls be patient."
+    content: `Hi ${username}, I'm saving your nft.storage api key now, pls be patient.`
   });
 
   await nftStorageModel.upsertApiKey({ userId }, { apiKey });

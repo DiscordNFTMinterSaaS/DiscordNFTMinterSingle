@@ -16,6 +16,7 @@ This repo is base on the <https://github.com/AnIdiotsGuide/guidebot/>, and add f
   * Visit <https://discord.com/oauth2/authorize?client_id=APP_ID&scope=bot> , replacing `APP_ID` with the `Application ID` from the app page, to add the bot to your server (or ask a server admin to do it for you). If you're wanting slash commands as well, add `%20applications.commands` to the end of the URL above.
   * Copy the bot `TOKEN` and paste it in `.env` after `DISCORD_TOKEN=`
 * Add `MONGODB_URI` in `.env` file, we can get a free plain from <https://cloud.mongodb.com/>
+* Copy your discord user id and add to `OWNER` in `.env` file
 * `npm run dev` for local development
 
 ## For mac in China
