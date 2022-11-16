@@ -2,7 +2,14 @@
 // Node version, if it isn't it will throw the following error to inform
 // you.
 if (Number(process.version.slice(1).split(".")[0]) < 16) throw new Error("Node 16.x or higher is required. Update Node on your system.");
-require("dotenv").config();
+
+const configName = process.env.CONFIG;
+if (configName) {
+  require("dotenv").config({ path: `${__dirname}/.env.${configName}` });
+} else {
+  require("dotenv").config();
+}
+
 
 // Load up the discord.js library
 const { Client, Collection } = require("discord.js");

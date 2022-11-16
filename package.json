@@ -4,7 +4,9 @@
   "description": "A boilerplate example bot with command handler and reloadable commands. Updated and Maintained by the Idiot's Guide Community",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "pdev": "GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:8080 CONFIG=dev nodemon -e js,json -r 'global-agent/bootstrap' index.js"
   },
   "engines": {
     "node": ">=16"
@@ -36,6 +38,8 @@
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0"
+    "eslint-plugin-promise": "^5.1.0",
+    "global-agent": "^3.0.0",
+    "nodemon": "^2.0.19"
   }
 }
