@@ -10,7 +10,7 @@ if (configName) {
   require("dotenv").config();
 }
 
-
+const db = require("./modules/mongoose");
 // Load up the discord.js library
 const { Client, Collection } = require("discord.js");
 // We also load the rest of the things we need in this file:
@@ -48,7 +48,8 @@ client.container = {
 // we need to wrap stuff in an anonymous function. It's annoying but it works.
 
 const init = async () => {
-
+  await db.init();
+  
   // Here we load **commands** into memory, as a collection, so they're accessible
   // here and everywhere else.
   const commands = readdirSync("./commands/").filter(file => file.endsWith(".js"));
