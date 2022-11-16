@@ -15,14 +15,16 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     return message.channel.send("you must attach an file");
   }
   const { url } = attachment;
-  const nftStorageModel = require("../models/nftStorage");
+  message.channel.send("I'm uploading your image, pls wait!");
 
-  const rz = await nftStorageModel.uploadFile({
+  const nftStorageModel = require("../models/nftStorage");
+  const rz = await nftStorageModel.uploadBlob({
     userId,
-    url,
+    data: url,
     name: `${name}-img`,
     guildId,
-    channelId
+    channelId,
+    uploadType: "image"
   });
   if (rz.cid) {
     return message.channel.send(`upload success with IPFS CID: ${rz.cid}, you can check the file here: https://${rz.cid}.ipfs.nftstorage.link`);

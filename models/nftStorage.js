@@ -12,7 +12,24 @@ exports.upsertApiKey = async (query, data) => {
   return nftStorageApiKeyModel.findOneAndUpdate(query, { $set: data }, { upsert: true });
 };
 
-exports.uploadFile = async ({ userId, url, name, guildId, channelId }) => {
+const blobDataCreator = {
+  image: async data => {
+    const url = data;
+    const img = await axios({
+      method: "get",
+      url,
+      responseType: "arraybuffer"
+    });
+    return new Blob([img.data]);
+  },
+  json: data => {
+    return new Blob([JSON.stringify(data, null, 2)], {
+      type: "application/json",
+    });
+  }
+};
+
+exports.uploadBlob = async ({ userId, data, name, guildId, channelId, uploadType }) => {
   const { apiKey: token } = await getApiKey(userId);
   if (!token) {
     return {
@@ -23,19 +40,21 @@ exports.uploadFile = async ({ userId, url, name, guildId, channelId }) => {
 
   const storage = new NFTStorage({ token });
   const rzStore = await nftStorageItemsModel.create({
-    userId, url, name, guildId, channelId
+    userId, data, name, guildId, channelId, uploadType
   });
 
   const storeId = rzStore._id + "";
 
   try {
-    const img = await axios({
-      method: "get",
-      url,
-      responseType: "arraybuffer"
-    });
-    console.log("====> img :", img);
-    const cid = await storage.storeBlob(new Blob([img.data]));
+    if (!blobDataCreator[uploadType]) {
+      return {
+        err: "unknownUploadType",
+        msg: "the upload type is unknown"
+      };
+    }
+
+    const theBlob = await blobDataCreator[uploadType](data);
+    const cid = await storage.storeBlob(theBlob);
     await nftStorageItemsModel.findByIdAndUpdate(storeId, { $set: { cid } });
 
     return {cid};
