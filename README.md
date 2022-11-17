@@ -30,3 +30,7 @@ For me, I use a socks5 proxy on my Mac, so I need to forward http request into s
 * `pproxy -r socks5://127.0.0.1:1080 vv`
 * now I have a http proxy listen on `http://127.0.0.1:8080`
 * `npm run pdev`
+
+## Add deploy config for Heroku
+
+check the Procfile for more detail
